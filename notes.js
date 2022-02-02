@@ -10,8 +10,12 @@ const loadNotes = () => {
   }
 };
 
+
+
 //-SAVING THE NOTES-
 const saveNotes = (notes) => fs.writeFileSync("data.json", JSON.stringify(notes));
+
+
 
 //-ADDING THE NOTES-
 const addNote = (title, body) => {
@@ -26,37 +30,46 @@ const addNote = (title, body) => {
 
     saveNotes(notes);
 
-    console.log(chalk.green("Note added!"));
-  } else console.log(chalk.red("The note has already been added!"));
+    console.log(chalk.green("Note added!"), "\n");
+  } else console.log(chalk.red("The note has already been added!"), "\n");
 };
+
+
 
 //-REMOVING THE NOTES-
 const removeNote = (title) => {
   const notes = loadNotes();
   const filtered = notes.filter((note) => note.title !== title);
 
-  if (notes.length !== filtered.length) console.log(chalk.green("The note has been removed successfully"));
-  else console.log(chalk.red("The note doesn't exist"));
+  if (notes.length !== filtered.length) console.log(chalk.green("The note has been removed successfully"), "\n");
+  else console.log(chalk.red("The note doesn't exist"), "\n");
 
   saveNotes(filtered);
 };
+
+
 
 //-LISTING THE NOTES-
 const listNotes = () => {
   const notes = loadNotes();
 
   console.log(chalk.blueBright("Your Notes:"));
-  notes.forEach((note) => console.log(chalk.yellow(note.title)));
+  notes.forEach((note) => console.log(chalk.whiteBright(note.title)));
+  console.log("")
 };
+
+
 
 //-READING THE NOTES-
 const readNote = (title) => {
   const notes = loadNotes();
   const note = notes.find((note) => note.title === title);
 
-  if (note) console.log(`${note.title} : ${note.body}`);
-  else console.log(chalk.red("Note not found!"));
+  if (note) console.log(chalk.whiteBright(`${note.title} : ${note.body}`), "\n");
+  else console.log(chalk.red("Note not found!"), "\n");
 };
+
+
 
 module.exports = {
   addNote,

@@ -1,13 +1,18 @@
-# Note taking app in NodeJs
+# Note taking app made in NodeJS
 
-Run "npm i" to install the required packages before running
+Run " npm i " in the app directory to install the required packages before running
 
-App Commands:
+To run the app just type: "node app.js" in the terminal
+###App Commands:
 
-Add Note Command : node app.js add --title="title of the note" --body="description of the note"
++ Add : add --title='' --body=''
++ Remove : remove --title=''
++ Read : read --title=''
++ List : list
++ Help : help
++ Exit : exit
 
-Remove Command : node app.js remove --title="title of the note you want to remove"
 
-List Command : node app.js list
-
-Read Command : node app.js read --title="title of the note you want to read"
+###Arguments:
++ --title or -t
++ --body or -b

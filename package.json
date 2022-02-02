@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.1",
-    "yargs": "^16.2.0"
+    "figlet": "^1.5.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
