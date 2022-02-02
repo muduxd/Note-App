@@ -3,7 +3,7 @@
 Run " npm i " in the app directory to install the required packages before running
 
 To run the app just type: "node app.js" in the terminal
-###App Commands:
+### App Commands:
 
 + Add : add --title='' --body=''
 + Remove : remove --title=''
@@ -13,6 +13,6 @@ To run the app just type: "node app.js" in the terminal
 + Exit : exit
 
 
-###Arguments:
+### Arguments:
 + --title or -t
 + --body or -b
