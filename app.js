@@ -1,15 +1,12 @@
 #!/usr/bin/env node
 
 const figlet = require("figlet")
-const chalk = require("chalk");
-const notes = require("./notes");
-const stdin = process.openStdin();
+const chalk = require("chalk")
+const notes = require("./notes")
+const stdin = process.openStdin()
 
 
-const getPosition = (string, subString, index) => {
-  return string.split(subString, index).join(subString).length;
-}
-
+const getPosition = (string, subString, index) => string.split(subString, index).join(subString).length
 
 const validateArgument = (arguments, longForm, shortForm) => {
   if (
@@ -32,13 +29,12 @@ console.log(
       whitespaceBreak: true
     })
   ), "\n"
-);
+)
 
 console.log(chalk.yellow("Type 'help' to check the available commands."), "\n")
 
-
-
 stdin.addListener("data", (data) => {
+
   const cli = data.toString().trim()
 
   let command = ""
@@ -57,88 +53,93 @@ stdin.addListener("data", (data) => {
   if (!foundCommand) command = cli
 
 
+
   switch (command) {
 
       case "add": {
-          const title = validateArgument(arguments.slice(0, getPosition(arguments, "'", 2) + 1).trim(), "title", "t")
-          const body = validateArgument(arguments.slice(getPosition(arguments, "'", 2) + 1).trim(), "body", "b")
+        const title = validateArgument(arguments.slice(0, getPosition(arguments, "'", 2) + 1).trim(), "title", "t")
+        const body = validateArgument(arguments.slice(getPosition(arguments, "'", 2) + 1).trim(), "body", "b")
 
-          if (!title || !body) {
-            console.log(chalk.red("Please enter the required arguments!"), "\n")
-            break
-          }
-
-          notes.addNote(title, body)
+        if (!title || !body) {
+          console.log(chalk.red("Please enter the required arguments!"), "\n")
           break
+        }
+
+        notes.addNote(title, body)
+        break
       }
 
 
       case "remove": {
-          const title = validateArgument(arguments, "title", "t");
+        const title = validateArgument(arguments, "title", "t")
 
-          if (!title) {
-            console.log(chalk.red("Please enter the required arguments!"), "\n")
-            break
-          }
-
-          notes.removeNote(title)
+        if (!title) {
+          console.log(chalk.red("Please enter the required arguments!"), "\n")
           break
+        }
+
+        notes.removeNote(title)
+        break
       }  
       
 
       case "read": {
-          const title = validateArgument(arguments, "title", "t");
+        const title = validateArgument(arguments, "title", "t")
 
-          if (!title) {
-            console.log(chalk.red("Please enter the required arguments!"), "\n")
-            break
-          }
-
-          notes.readNote(title)
+        if (!title) {
+          console.log(chalk.red("Please enter the required arguments!"), "\n")
           break
+        }
+
+        notes.readNote(title)
+        break
       }
 
 
-      case "list": 
-          if (arguments.length !== 0) { 
-            console.log(chalk.red("This command does not require any arguments!"), "\n")
-            break
-          }
-
-          notes.listNotes()
+      case "list": {
+        if (arguments.length !== 0) { 
+          console.log(chalk.red("This command does not require any arguments!"), "\n")
           break
+        }
+
+        notes.listNotes()
+        break
+      }
 
 
-      case "help":
-          if (arguments.length !== 0) { 
-            console.log(chalk.red("This command does not require any arguments!"), "\n")
-            break
-          }
-
-          console.log(
-            chalk.yellow("Commands:"), "\n", 
-            chalk.yellow("- add -t='' -b='' : adds a note"), "\n", 
-            chalk.yellow("- remove -t='' : removes a note"), "\n",
-            chalk.yellow("- read -t='' : reads a note"), "\n",
-            chalk.yellow("- list : lists all notes"), "\n",
-            chalk.yellow("- help : shows available commands"), "\n",
-            chalk.yellow("- exit : exits the app"), "\n"
-          )
+      case "help": {
+        if (arguments.length !== 0) { 
+          console.log(chalk.red("This command does not require any arguments!"), "\n")
           break
+        }
+
+        console.log(
+          chalk.yellow("Commands:"), "\n", 
+          chalk.yellow("- add -t='' -b='' : adds a note"), "\n", 
+          chalk.yellow("- remove -t='' : removes a note"), "\n",
+          chalk.yellow("- read -t='' : reads a note"), "\n",
+          chalk.yellow("- list : lists all notes"), "\n",
+          chalk.yellow("- help : shows available commands"), "\n",
+          chalk.yellow("- exit : exits the app"), "\n"
+        )
+        break
+      }
 
         
-      case "exit":
-          if (arguments.length !== 0) { 
-            console.log(chalk.red("This command does not require any arguments!"), "\n")
-            break
-          }
-
-          console.log(chalk.yellow("Exiting..."), "\n")
-          process.exit(1)
-        
-
-        default:
-          console.log(chalk.red("Please enter a valid command!"), "\n")
+      case "exit": {
+        if (arguments.length !== 0) { 
+          console.log(chalk.red("This command does not require any arguments!"), "\n")
           break
+        }
+
+        console.log(chalk.yellow("Exiting..."), "\n")
+        process.exit(1)
+      }
+
+      default: {
+        console.log(chalk.red("Please enter a valid command!"), "\n")
+        break
+      }
+      
   }
-});
+})
